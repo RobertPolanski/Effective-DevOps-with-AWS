@@ -1,0 +1,8 @@
+---
+# handlers file for helloworld
+
+- name: restart helloworld
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: HelloWorld
