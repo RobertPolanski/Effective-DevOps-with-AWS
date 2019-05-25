@@ -136,8 +136,8 @@
                                 "#!/bin/bash",
                                 "yum install --enablerepo=epel -y git",
                                 "yum install --enablerepo=epel -y ansible",
-                                "/usr/bin/ansible-pull -U https://github.com/RobertPolanski/Effective-DevOps-with-AWS-Second-Edition/tree/master/Chapter05/ansible nodeserver.yml -i localhost",
-                                "echo '*/10 * * * * /usr/bin/ansible-pull -U https://github.com/RobertPolanski/Effective-DevOps-with-AWS-Second-Edition/tree/master/Chapter05/ansible nodeserver.yml -i localhost' > /etc/cron.d/ansible-pull"
+                                "/usr/bin/ansible-pull -U https://github.com/RobertPolanski/Effective-DevOps-with-AWS/tree/master/Chapter05/ansible nodeserver.yml -i localhost",
+                                "echo '*/10 * * * * /usr/bin/ansible-pull -U https://github.com/RobertPolanski/Effective-DevOps-with-AWS/tree/master/Chapter05/ansible nodeserver.yml -i localhost' > /etc/cron.d/ansible-pull"
                             ]
                         ]
                     }

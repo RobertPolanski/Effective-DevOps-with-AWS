@@ -33,7 +33,7 @@ from awacs.sts import AssumeRole
 ApplicationName = "nodeserver"
 ApplicationPort = "8080"
 GithubAccount = "RobertPolanski"
-GithubAnsibleURL = "https://github.com/{}/Effective-DevOps-with-AWS-Second-Edition/tree/master/Chapter05/ansible". \
+GithubAnsibleURL = "https://github.com/{}/ansible". \
     format(GithubAccount)
 
 PublicCidrIp = str(ip_network(get_ip()))
@@ -74,8 +74,11 @@ t.add_resource(ec2.SecurityGroup(
 ))
 
 ud = Base64(Join('\n', ["#!/bin/bash",
-                        "yum install --enablerepo=epel -y git",
-                        "yum install --enablerepo=epel -y ansible",
+                        "sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm",
+                        "sudo yum install python-pip -y",
+                        "sudo pip install boto",
+                        "sudo yum install --enablerepo=epel -y git",
+                        "sudo yum install --enablerepo=epel -y ansible",
                         AnsiblePullCmd,
                         "echo '*/10 * * * * {}' > /etc/cron.d/ansible-pull".format(AnsiblePullCmd)
                         ]))
