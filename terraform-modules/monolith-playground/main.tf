@@ -28,7 +28,7 @@ EOF
   subnet_id = "${var.my_subnet}"
   key_name  = "${var.my_pem_keyname}"
 
-  tags {
+  tags = {
     Name = "Monolith Playground"
   }
 }

@@ -2,7 +2,7 @@ variable "my_default_vpcid" {
   default = "vpc-e568218e"
 }
 module "monolith_application" {
-  source         = "github.com/RobertPolanski/effective_devops_with_aws//terraform-modules//monolith-playground"
+  source         = "github.com/RobertPolanski/Effective-DevOps-with-AWS//terraform-modules/monolith-playground"
   my_vpc_id      = "${var.my_default_vpcid}"
   my_subnet      = "subnet-54840730"
   my_ami_id      = "ami-0ebe657bc328d4e82"
