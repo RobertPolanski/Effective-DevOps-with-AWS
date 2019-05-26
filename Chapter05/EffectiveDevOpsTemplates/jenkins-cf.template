@@ -49,6 +49,30 @@
             },
             "Type": "AWS::IAM::InstanceProfile"
         },
+        "Policy": {
+            "Properties": {
+                "PolicyDocument": {
+                    "Statement": [
+                        {
+                            "Action": [
+                                "s3:*"
+                            ],
+                            "Effect": "Allow",
+                            "Resource": [
+                                "*"
+                            ]
+                        }
+                    ]
+                },
+                "PolicyName": "AllowS3",
+                "Roles": [
+                    {
+                        "Ref": "Role"
+                    }
+                ]
+            },
+            "Type": "AWS::IAM::Policy"
+        },
         "Role": {
             "Properties": {
                 "AssumeRolePolicyDocument": {
@@ -110,10 +134,11 @@
                             "\n",
                             [
                                 "#!/bin/bash",
-                                "yum install --enablerepo=epel -y git",
-                                "yum install --enablerepo=epel -y ansible",
-                                "/usr/bin/ansible-pull -U https://github.com/RobertPolanski/Effective-DevOps-with-AWS/tree/master/Chapter05/ansible jenkins.yml -i localhost",
-                                "echo '*/10 * * * * /usr/bin/ansible-pull -U https://github.com/RobertPolanski/Effective-DevOps-with-AWS/tree/master/Chapter05/ansible jenkins.yml -i localhost' > /etc/cron.d/ansible-pull"
+                                "sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm",
+                                "sudo yum install --enablerepo=epel -y git",
+                                "sudo yum install --enablerepo=epel -y ansible",
+                                "/usr/bin/ansible-pull -U https://github.com/RobertPolanski/ansible jenkins.yml -i localhost",
+                                "echo '*/10 * * * * /usr/bin/ansible-pull -U https://github.com/RobertPolanski/ansible jenkins.yml -i localhost' > /etc/cron.d/ansible-pull"
                             ]
                         ]
                     }

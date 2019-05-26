@@ -134,10 +134,13 @@
                             "\n",
                             [
                                 "#!/bin/bash",
-                                "yum install --enablerepo=epel -y git",
-                                "yum install --enablerepo=epel -y ansible",
-                                "/usr/bin/ansible-pull -U https://github.com/RobertPolanski/Effective-DevOps-with-AWS/tree/master/Chapter05/ansible nodeserver.yml -i localhost",
-                                "echo '*/10 * * * * /usr/bin/ansible-pull -U https://github.com/RobertPolanski/Effective-DevOps-with-AWS/tree/master/Chapter05/ansible nodeserver.yml -i localhost' > /etc/cron.d/ansible-pull"
+                                "sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm",
+                                "sudo yum install python-pip -y",
+                                "sudo pip install boto",
+                                "sudo yum install --enablerepo=epel -y git",
+                                "sudo yum install --enablerepo=epel -y ansible",
+                                "/usr/bin/ansible-pull -U https://github.com/RobertPolanski/ansible nodeserver.yml -i localhost",
+                                "echo '*/10 * * * * /usr/bin/ansible-pull -U https://github.com/RobertPolanski/ansible nodeserver.yml -i localhost' > /etc/cron.d/ansible-pull"
                             ]
                         ]
                     }
