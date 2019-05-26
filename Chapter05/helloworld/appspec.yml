@@ -3,8 +3,12 @@ os: linux
 files:
   - source: helloworld.js
     destination: /usr/local/helloworld/
-  - source: scripts/helloworld.conf
-    destination: /etc/init/
+  - source: scripts/HelloWorld.service
+    destination: /etc/systemd/system/
+  - source: scripts/HelloWorld.sh
+      destination: /home/ec2-user/
+
+
 hooks: 
   BeforeInstall: 
     - location: scripts/stop.sh 

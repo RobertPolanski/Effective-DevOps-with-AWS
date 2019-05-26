@@ -1,3 +1,4 @@
 #!/bin/sh
     
-start helloworld 
+# start helloworld
+sudo systemctl start HelloWorld

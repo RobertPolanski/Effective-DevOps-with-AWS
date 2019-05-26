@@ -1,8 +1,7 @@
 
 aws iam create-role \
   --role-name CodeDeployServiceRole \
-  --assume-role-policy-document \
-  https://github.com/RobertPolanski/Effective-DevOps-with-AWS/blob/master/Chapter05/misc/CodeDeployTrust.json
+  --assume-role-policy-document file://CodeDeployTrust.json
 
 aws iam attach-role-policy \
   --role-name CodeDeployServiceRole \
