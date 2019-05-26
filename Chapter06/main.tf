@@ -9,7 +9,7 @@ module "monolith_application" {
   my_vpc_id      = "${var.my_default_vpcid}"
   my_subnet      = "${var.my_subnet}"
   my_ami_id      = "ami-0ebe657bc328d4e82"
-  my_pem_keyname = "effectivedevops"
+  my_pem_keyname = "EffectiveDevOpsAWS"
 }
 output "monolith_url" { value = "${module.monolith_application.url}"}
 
