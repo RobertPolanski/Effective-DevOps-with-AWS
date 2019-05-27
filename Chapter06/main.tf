@@ -4,6 +4,11 @@ variable "my_default_vpcid" {
 variable "my_subnet" {
   default = "subnet-feb08e95"
 }
+variable "subnet_ids" {
+  type        = "list"
+  description = "A list of VPC subnet IDs"
+  default     = ["subnet-d056b4ff", "subnet-b541edfe"]
+}
 module "monolith_application" {
   source         = "github.com/RobertPolanski/Effective-DevOps-with-AWS//terraform-modules/monolith-playground"
   my_vpc_id      = "${var.my_default_vpcid}"
@@ -26,8 +31,10 @@ resource "aws_security_group" "rds" {
   }
 }
 
-module "db" {
-  source = "terraform-aws-modules/rds/aws"
+module "rds" {
+  source  = "terraform-aws-modules/rds/aws"
+  version = "1.28.0"
+  # insert the 10 required variables here
   identifier = "demodb"
   engine            = "mysql"
   engine_version    = "5.7.19"
@@ -37,14 +44,32 @@ module "db" {
   username = "monty"
   password = "some_pass"
   port     = "3306"
-
-  vpc_security_group_ids = ["${aws_security_group.rds.id}"]
-  # DB subnet group
-  subnet_ids = ["subnet-d056b4ff", "subnet-b541edfe"]
+  //vpc_security_group_ids = ["${aws_security_group.rds.id}"]
+  //subnet_ids = "${var.subnet_ids}"
   maintenance_window = "Mon:00:00-Mon:03:00"
   backup_window      = "03:00-06:00"
-  # DB parameter group
-  family = "mysql5.7"
-  # DB option group
-  major_engine_version = "5.7"
+  //family = "mysql5.7"
+  //major_engine_version = "5.7"
 }
+
+//module "db" {
+//  source = "terraform-aws-modules/rds/aws"
+//  identifier = "demodb"
+//  engine            = "mysql"
+//  engine_version    = "5.7.19"
+//  instance_class    = "db.t2.micro"
+//  allocated_storage = 5
+//  name     = "demodb"
+//  username = "monty"
+//  password = "some_pass"
+//  port     = "3306"
+//  vpc_security_group_ids = ["${aws_security_group.rds.id}"]
+//  # DB subnet group
+//  subnet_ids = "${var.subnet_ids}"
+//  maintenance_window = "Mon:00:00-Mon:03:00"
+//  backup_window      = "03:00-06:00"
+//  # DB parameter group
+//  family = "mysql5.7"
+//  # DB option group
+//  major_engine_version = "5.7"
+//}
