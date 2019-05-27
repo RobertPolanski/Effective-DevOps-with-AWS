@@ -26,25 +26,25 @@ resource "aws_security_group" "rds" {
   }
 }
 
-//module "db" {
-//  source = "terraform-aws-modules/rds/aws"
-//  identifier = "demodb"
-//  engine            = "mysql"
-//  engine_version    = "5.7.19"
-//  instance_class    = "db.t2.micro"
-//  allocated_storage = 5
-//  name     = "demodb"
-//  username = "monty"
-//  password = "some_pass"
-//  port     = "3306"
-//
-//  vpc_security_group_ids = ["${aws_security_group.rds.id}"]
-//  # DB subnet group
-//  subnet_ids = ["subnet-d056b4ff", "subnet-b541edfe"]
-//  maintenance_window = "Mon:00:00-Mon:03:00"
-//  backup_window      = "03:00-06:00"
-//  # DB parameter group
-//  family = "mysql5.7"
-//  # DB option group
-//  major_engine_version = "5.7"
-//}
+module "db" {
+  source = "terraform-aws-modules/rds/aws"
+  identifier = "demodb"
+  engine            = "mysql"
+  engine_version    = "5.7.19"
+  instance_class    = "db.t2.micro"
+  allocated_storage = 5
+  name     = "demodb"
+  username = "monty"
+  password = "some_pass"
+  port     = "3306"
+
+  vpc_security_group_ids = ["${aws_security_group.rds.id}"]
+  # DB subnet group
+  subnet_ids = ["subnet-d056b4ff", "subnet-b541edfe"]
+  maintenance_window = "Mon:00:00-Mon:03:00"
+  backup_window      = "03:00-06:00"
+  # DB parameter group
+  family = "mysql5.7"
+  # DB option group
+  major_engine_version = "5.7"
+}
